@@ -3,18 +3,44 @@
 import { memo } from "react";
 import { useDrop } from "react-dnd";
 
+import { Page } from "./Page";
+import { useSelector } from "react-redux";
+import {
+  EditorState,
+  TElement,
+  TElementDropResult,
+  TPage,
+} from "@/shared/types";
+
 export interface EditorProps {
   className?: string;
 }
 
 export const Editor = memo(function Editor({ className }: EditorProps) {
+  const { pages, focusedPageId } = useSelector((state: any) => state.editor);
+
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
-    accept: "any",
-    drop: () => ({ name: "Dustbin" }),
-    collect: (monitor) => ({
-      isOver: monitor.isOver(),
-      canDrop: monitor.canDrop(),
-    }),
+    accept: "TElement",
+    drop: (item: TElement, monitor): TElementDropResult => {
+      let relativeX, relativeY;
+      const workAreaElement = document.getElementById("workarea");
+      const clientOffset = monitor.getClientOffset();
+
+      if (workAreaElement && clientOffset) {
+        const workAreaRect = workAreaElement?.getBoundingClientRect();
+
+        relativeX = clientOffset.x - workAreaRect.left;
+        relativeY = clientOffset.y - workAreaRect.top;
+      }
+
+      return { item, x: relativeX, y: relativeY };
+    },
+    collect: (monitor) => {
+      return {
+        isOver: monitor.isOver(),
+        canDrop: monitor.canDrop(),
+      };
+    },
   }));
 
   const isActive = canDrop && isOver;
@@ -25,14 +51,11 @@ export const Editor = memo(function Editor({ className }: EditorProps) {
     backgroundColor = "darkkhaki";
   }
 
+  const page = pages.filter((p: TPage) => p.id === focusedPageId)[0];
+
   return (
     <div className={`p-4 flex align-middle justify-center ${className}`}>
-      <div
-        ref={drop}
-        id="workarea"
-        className="w-3/4 bg-orange-50 rounded-sm"
-        data-testid="editor"
-      ></div>
+      <Page drop={drop} page={page} />
     </div>
   );
 });

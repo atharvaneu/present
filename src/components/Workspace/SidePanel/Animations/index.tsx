@@ -13,11 +13,27 @@ export interface AnimationsProps {
 const tools = [
   {
     name: "Ease in",
-    icon: <ArrowForwardIcon />,
+    icon: "icons/ease-in.svg",
   },
   {
     name: "Ease out",
-    icon: <ArrowBackIcon />,
+    icon: "icons/ease-out.svg",
+  },
+  {
+    name: "Ease in out",
+    icon: "icons/ease-in-out.svg",
+  },
+  {
+    name: "Linear",
+    icon: <ArrowDownIcon />,
+  },
+  {
+    name: "Linear",
+    icon: <ArrowDownIcon />,
+  },
+  {
+    name: "Linear",
+    icon: <ArrowDownIcon />,
   },
   {
     name: "Linear",
@@ -36,7 +52,7 @@ const tools = [
 export function Animations({ className }: AnimationsProps) {
   return (
     <TabPanel>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-4">
         {tools.map(({ name, icon }) => {
           function generateKey(s: string) {
             return s.trim().replace(" ", "").toLowerCase();
