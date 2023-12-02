@@ -84,6 +84,16 @@ export const editorSlice = createSlice({
       element.position.y = payload.y
     },
 
+    deletePage: (state: EditorState, action) => {
+      const { pages, focusedPageId } = state
+      const { payload } = action
+
+      return {
+        ...state,
+        pages: state.pages.filter((p) => p?.id !== payload),
+      }
+    },
+
     loadPages: (state: EditorState, action) => {
       const { payload } = action
 
@@ -138,6 +148,7 @@ export const {
   changeElementSize,
   loadPages,
   addAnimation,
+  deletePage,
 } = editorSlice.actions
 
 export default editorSlice.reducer
