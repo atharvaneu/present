@@ -1,7 +1,7 @@
 import Image from 'next/image'
 
 import { TElement } from '@/shared/types'
-import './app.css'
+import '../app.css'
 import { useEffect, useState } from 'react'
 
 export interface DisplayElementProps {

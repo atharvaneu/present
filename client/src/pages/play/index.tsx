@@ -1,7 +1,9 @@
 import { TPage } from '@/shared/types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import DisplayPage from './DisplayPage'
+import DisplayPage from './components/DisplayPage'
+import { useToast } from '@chakra-ui/react'
+import ControlsBar from './components/ControlsBar'
 
 export interface PlayPresentationProps {
   className?: string
@@ -10,6 +12,7 @@ export interface PlayPresentationProps {
 export default function PlayPresentation({ className }: PlayPresentationProps) {
   const [pages, setPages] = useState<TPage[]>([])
   const [focusedPage, setFocusedPage] = useState<number>(0)
+  const toast = useToast()
 
   const SERVER_DOMAIN = 'http://localhost:8080'
 
@@ -44,6 +47,7 @@ export default function PlayPresentation({ className }: PlayPresentationProps) {
     <div>
       Page {focusedPage + 1}
       <DisplayPage page={pages[focusedPage]} />
+      <ControlsBar setFocusedPage={setFocusedPage} />
     </div>
   )
 }
