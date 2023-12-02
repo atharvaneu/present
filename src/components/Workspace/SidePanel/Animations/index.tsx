@@ -2,64 +2,51 @@ import {
   ArrowBackIcon,
   ArrowDownIcon,
   ArrowForwardIcon,
-} from "@chakra-ui/icons";
-import { TabPanel } from "@chakra-ui/tabs";
-import { Tool } from "../ToolBox";
+} from '@chakra-ui/icons'
+import { TabPanel } from '@chakra-ui/tabs'
+import { Tool } from '../ToolBox'
+import { AnimationEntity } from './AnimationEntity'
 
 export interface AnimationsProps {
-  className?: string;
+  className?: string
 }
 
 const tools = [
   {
-    name: "Ease in",
-    icon: "icons/ease-in.svg",
+    name: 'Ease in',
+    css: 'ease-in',
+    icon: 'icons/ease-in.svg',
   },
   {
-    name: "Ease out",
-    icon: "icons/ease-out.svg",
+    name: 'Ease out',
+    css: 'ease-out',
+    icon: 'icons/ease-out.svg',
   },
   {
-    name: "Ease in out",
-    icon: "icons/ease-in-out.svg",
+    name: 'Ease in out',
+    css: 'ease-in-out',
+    icon: 'icons/ease-in-out.svg',
   },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-  {
-    name: "Linear",
-    icon: <ArrowDownIcon />,
-  },
-];
+]
 
 export function Animations({ className }: AnimationsProps) {
   return (
     <TabPanel>
       <div className="grid grid-cols-4">
-        {tools.map(({ name, icon }) => {
+        {tools.map(({ name, css, icon }) => {
           function generateKey(s: string) {
-            return s.trim().replace(" ", "").toLowerCase();
+            return s.trim().replace(' ', '').toLowerCase()
           }
-          return <Tool key={generateKey(name)} name={name} icon={icon} />;
+          return (
+            <AnimationEntity
+              key={generateKey(name)}
+              name={name}
+              css={css}
+              icon={icon}
+            />
+          )
         })}
       </div>
     </TabPanel>
-  );
+  )
 }

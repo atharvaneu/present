@@ -1,87 +1,104 @@
-import { mountElement } from "@/redux/editor/editorSlice";
-import { TElement, TElementDropResult } from "@/shared/types";
-import ItemBuilder from "@/utils/builders/ItemBuilder";
-import { Tooltip } from "@chakra-ui/react";
-import Image from "next/image";
-import { ReactNode } from "react";
-import { useDrag } from "react-dnd";
-import { useDispatch, useSelector } from "react-redux";
+import { Tooltip } from '@chakra-ui/react'
+import Image from 'next/image'
+import { useEffect, useRef, useState, memo } from 'react'
+import { useDrag } from 'react-dnd'
+import { useDispatch, useSelector } from 'react-redux'
+import { useImageSize } from 'react-image-size'
+
+import { mountElement } from '@/redux/editor/editorSlice'
+import ItemBuilder from '@/utils/builders/ItemBuilder'
+import { TElement, TElementDropResult } from '@/shared/types'
 
 export interface ToolProps {
-  className?: string;
-  name: string;
-  icon: ReactNode | string;
+  className?: string
+  name: string
+  icon: string
 }
 
-export function Tool({ className, name, icon }: ToolProps) {
-  const { focusedPageId } = useSelector((state: any) => state.editor);
-  const dispatch = useDispatch();
+export const Tool = memo(function Tool({ className, name, icon }: ToolProps) {
+  const [element, setElement] = useState<TElement>()
+
+  const [naturalDimensions, { loading, error }] = useImageSize(icon as string)
+
+  const { focusedPageId } = useSelector((state: any) => state.editor)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    const item = {
+      ...element,
+      width: `${naturalDimensions?.width}px`,
+      height: `${naturalDimensions?.height}px`,
+    }
+    dispatch(mountElement(item))
+  }, [naturalDimensions, element])
 
   const item: TElement = {
     animation: {
-      type: "",
+      name: '',
+      css: '',
     },
     position: {
       x: 0,
       y: 0,
     },
-    id: "0",
-    width: "0px",
-    height: "0px",
+    id: '0',
+    width: '0px',
+    height: '0px',
     name,
     icon,
-  };
+    mouseOffset: {
+      x: 0,
+      y: 0,
+    },
+  }
 
   const [{ isDragging }, drag] = useDrag(() => ({
-    type: "TElement",
+    type: 'TElement',
     item,
     end: (item: TElement, monitor) => {
-      const dropResult = monitor.getDropResult<TElementDropResult>();
+      const dropResult = monitor.getDropResult<TElementDropResult>()
       if (item && dropResult) {
-        let { x, y } = dropResult;
-        x = x ?? 0;
-        y = y ?? 0;
+        let { x, y } = dropResult
+        x = x ?? 0
+        y = y ?? 0
 
         const _item = new ItemBuilder(name, icon, focusedPageId)
-          .withAnimation({ type: "" })
+          .withAnimation({ name: '', css: '' })
           .withPosition({ x, y })
-          .withSize("300px", "300px")
-          .build();
+          .build()
 
-        dispatch(mountElement(_item));
-        // item should get bind() with the page and rendered on the page itself
+        setElement(_item)
       }
     },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
       handlerId: monitor.getHandlerId(),
     }),
-  }));
+  }))
+
+  if (loading) return <div>Images are loading</div>
 
   return (
     <Tooltip label={name}>
       <div
         ref={drag}
-        className={`p-2 hover:bg-slate-200 border-b-[1px] cursor-grabbing flex flex-col text-center  ${className}`}
+        className={`p-2 hover:bg-slate-200 rounded-sm cursor-grabbing flex flex-col text-center ${className}`}
         data-testid="tool"
       >
-        {typeof icon === "string" ? (
+        {typeof icon === 'string' ? (
           <span className="mx-auto">
             <Image
               className="mx-auto text-xs"
               src={icon}
               alt="icon"
-              width={25}
-              height={25}
+              width={35}
+              height={35}
             />
           </span>
         ) : (
-          <>
-            <span className="mx-auto">{icon}</span>
-            <span className="mx-auto text-xs">{name}</span>
-          </>
+          <span className="mx-auto">{icon}</span>
         )}
       </div>
     </Tooltip>
-  );
-}
+  )
+})

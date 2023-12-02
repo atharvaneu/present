@@ -1,7 +1,7 @@
-import { StatePage, TElement, TLayer, TPage } from "@/shared/types";
+import { PageState, TElement, TLayer, TPage } from "@/shared/types";
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState: StatePage = {};
+const initialState: PageState = {};
 
 export const pageSlice = createSlice({
   name: "page",

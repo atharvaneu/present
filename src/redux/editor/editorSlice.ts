@@ -1,65 +1,143 @@
-import { EditorState, TElement, TLayer, TPage } from "@/shared/types";
-import { createSlice } from "@reduxjs/toolkit";
+import { EditorState, TElement, TLayer, TPage } from '@/shared/types'
+import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState: EditorState = {
   pages: [],
-  focusedPageId: "NULL",
-};
+  focusedPageId: 'NULL',
+}
 
 export const editorSlice = createSlice({
-  name: "editor",
+  name: 'editor',
   initialState,
   reducers: {
     focusPage: (state: EditorState, action) => {
-      state.focusedPageId = action.payload;
+      state.focusedPageId = action.payload
     },
 
-    addPage: (state: EditorState) => {
+    addPage: (state: EditorState): EditorState => {
       const element: TElement = {
         animation: {
-          type: "easein", /// these values will be given through the actions.payload
+          name: 'Ease in', /// these values will be given through the actions.payload
+          css: 'ease-in',
         },
         position: {
           x: 30,
           y: 50,
         },
-        id: "0",
-        width: "300px",
-        height: "300px",
-        name: "default",
-        icon: "",
-      };
-
+        id: '0',
+        width: '300px',
+        height: '300px',
+        name: 'default',
+        icon: '',
+        mouseOffset: {
+          x: 0,
+          y: 0,
+        },
+      }
+      console.log('>>>> ', state?.pages?.length)
       const page: TPage = {
-        id: `page-${state.pages.length + 1}`,
+        id: `page-${state?.pages?.length + 1}`,
         layers: [],
         elements: [],
-      };
-      state.pages = [...state.pages, page];
+      }
+      return {
+        ...state,
+        pages: state.pages ? [...state.pages, page] : [page],
+      }
     },
 
     mountElement: (state: EditorState, action) => {
-      const { pages, focusedPageId } = state;
-      const { payload } = action;
+      const { pages, focusedPageId } = state
+      const { payload } = action
 
-      const targetPage = pages.find((e: TPage) => e.id === focusedPageId);
+      const targetPage = pages?.find((p: TPage) => p?.id === focusedPageId)
       if (!targetPage) {
-        console.error(`PageError: Page with ${focusedPageId} not found!`);
-        return;
+        console.error(`PageError: Page with ${focusedPageId} not found!`)
+        return
       }
 
-      const numberOfElements = targetPage.elements.length;
+      const numberOfElements = targetPage.elements.length
 
-      const element = payload;
-      element.id = `element-${numberOfElements}-${focusedPageId}`;
+      const element = payload
+      element.id = `element-${numberOfElements}-${focusedPageId}`
 
-      targetPage.elements.push(element);
+      targetPage.elements.push(element)
 
-      console.log(`Element (${element.name}) mounted`);
+      console.log(`Element (${element.name}) mounted`)
+    },
+
+    moveElement: (state: EditorState, action) => {
+      const { pages, focusedPageId } = state
+      const { payload } = action
+
+      const elementId: string = payload.item.id
+      if (elementId === '0') return
+
+      const targetPage = pages?.find((p: TPage) => p?.id === focusedPageId)
+      if (!targetPage) {
+        console.error(`PageError: Page with ${focusedPageId} not found!`)
+        return
+      }
+
+      const element = targetPage.elements.filter((p) => p?.id === elementId)[0]
+      element.position.x = payload.x
+      element.position.y = payload.y
+    },
+
+    loadPages: (state: EditorState, action) => {
+      const { payload } = action
+
+      return {
+        ...state,
+        pages: payload,
+      }
+    },
+
+    changeElementSize: (state: EditorState, action) => {
+      const { pages, focusedPageId } = state
+      const { payload } = action
+
+      const elementId: string = payload.item.id
+      if (elementId === '0') return
+
+      const targetPage = pages?.find((p: TPage) => p?.id === focusedPageId)
+      if (!targetPage) {
+        console.error(`PageError: Page with ${focusedPageId} not found!`)
+        return
+      }
+
+      const element = targetPage.elements.filter((p) => p?.id === elementId)[0]
+      element.width = payload.width
+      element.height = payload.height
+    },
+
+    addAnimation: (state: EditorState, action) => {
+      const { pages, focusedPageId } = state
+      const { payload } = action
+
+      const elementId: string = payload?.id
+      if (elementId === '0') return
+
+      const targetPage = pages?.find((p: TPage) => p?.id === focusedPageId)
+      if (!targetPage) {
+        console.error(`PageError: Page with ${focusedPageId} not found!`)
+        return
+      }
+
+      const element = targetPage.elements.filter((p) => p?.id === elementId)[0]
+      element.animation = payload.item
     },
   },
-});
+})
 
-export const { focusPage, addPage, mountElement } = editorSlice.actions;
+export const {
+  focusPage,
+  addPage,
+  mountElement,
+  moveElement,
+  changeElementSize,
+  loadPages,
+  addAnimation,
+} = editorSlice.actions
 
-export default editorSlice.reducer;
+export default editorSlice.reducer
