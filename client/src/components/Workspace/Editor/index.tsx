@@ -1,21 +1,23 @@
 'use client'
 
-import { memo } from 'react'
-import { useDrop } from 'react-dnd'
+import { memo, useRef } from 'react'
+import { ConnectableElement, useDrop } from 'react-dnd'
 
 import { Page } from './Page'
 import { useDispatch, useSelector } from 'react-redux'
 import { TElement, TElementDropResult, TPage } from '@/shared/types'
-import { moveElement } from '@/redux/editor/editorSlice'
+import { moveElement, setEditorProperties } from '@/redux/editor/editorSlice'
 
 export interface EditorProps {
   className?: string
 }
 
 export const Editor = memo(function Editor({ className }: EditorProps) {
-  const { pages, focusedPageId } = useSelector((state: any) => state.editor)
+  const { pages, focusedPageId, editor } = useSelector(
+    (state: any) => state.editor,
+  )
   const dispatch = useDispatch()
-
+  console.log(editor)
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'TElement',
     drop: (item: TElement, monitor): TElementDropResult => {
@@ -26,13 +28,15 @@ export const Editor = memo(function Editor({ className }: EditorProps) {
       if (workAreaElement && clientOffset) {
         const workAreaRect = workAreaElement?.getBoundingClientRect()
 
-        // console.log(clientOffset);
-        // console.log(">>>>", workAreaRect.left, workAreaRect.top);
         relativeX = clientOffset.x - workAreaRect.left // add the distance between cursor (where I grab the image) and clientOffset
         relativeY = clientOffset.y - workAreaRect.top
       }
 
-      const payload = { item, x: relativeX, y: relativeY }
+      const payload = {
+        item,
+        x: relativeX,
+        y: relativeY,
+      }
 
       dispatch(moveElement(payload))
       return payload

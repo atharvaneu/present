@@ -1,9 +1,11 @@
 import Image from 'next/image'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd'
 
 import { TElement } from '@/shared/types'
-import { addAnimation } from '@/redux/editor/editorSlice'
+import { addAnimation, setEditorProperties } from '@/redux/editor/editorSlice'
+import { setMouseCoords } from '@/redux/editor/utilSlice'
+import { useRef } from 'react'
 
 export interface ElementProps {
   element: TElement
@@ -18,6 +20,7 @@ export function Element({
   onRightClick,
   className,
 }: ElementProps) {
+  const { editor } = useSelector((state: any) => state.editor)
   const dispath = useDispatch()
 
   const { id, icon, position, width, height, name } = element
@@ -28,6 +31,7 @@ export function Element({
       type: 'TElement',
       item: element,
       collect: (monitor: DragSourceMonitor) => {
+        dispath(setMouseCoords({ x: 4, y: 9 }))
         return {
           isDragging: monitor.isDragging(),
         }
@@ -46,9 +50,33 @@ export function Element({
     },
   })
 
+  function onMouseDown(e: any, x: number, y: number) {
+    const W = parseInt(width.substring(0, width.length - 2))
+    const boundingRect = elementBox.current?.getBoundingClientRect()
+
+    // console.log(
+    //   `W: ${W}, Mouse: ${e.clientX}, Rect: ${boundingRect?.left as number}`,
+    // )
+
+    const offsetX = e.clientX - (boundingRect?.left as number)
+    const offsetY = e.clientY - (boundingRect?.top as number)
+
+    dispath(
+      setEditorProperties({
+        top: offsetY,
+        left: offsetX,
+      }),
+    )
+  }
+
+  const elementBox = useRef<HTMLDivElement | null>(null)
+
   return (
     <div
-      ref={(node) => elementDrag(drop(node))}
+      ref={(node) => {
+        elementBox.current = node
+        return elementDrag(drop(node))
+      }}
       style={{
         top: position.y,
         left: position.x,
@@ -58,6 +86,7 @@ export function Element({
       className={`hover:border border-slate-800 border-dashed ${className}`}
       onClick={onLeftClick}
       onContextMenu={onRightClick}
+      onMouseDown={(e) => onMouseDown(e, position.x, position.y)}
     >
       {typeof icon === 'string' ? (
         <Image

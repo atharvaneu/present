@@ -6,7 +6,6 @@ export interface DisplayPageProps {
 }
 
 export default function DisplayPage({ page }: DisplayPageProps) {
-  console.log(page)
   return (
     <div
       id="workarea"

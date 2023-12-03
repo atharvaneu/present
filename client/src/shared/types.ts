@@ -49,11 +49,22 @@ export interface TAnimationDropResult {
 /**
  * State types
  */
-export interface PageState {}
+export interface UtilState {
+  mouse: {
+    elementRelative: {
+      x: number
+      y: number
+    }
+  }
+}
 
 export interface EditorState {
   pages: TPage[]
   focusedPageId: string
+  editor: {
+    top: number
+    left: number
+  }
 }
 
 export interface ContextMenuState {

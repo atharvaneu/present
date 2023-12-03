@@ -15,10 +15,9 @@ export default function DisplayElement({ element }: DisplayElementProps) {
   const { x, y } = position
 
   useEffect(() => {
-    // Triggering the transition after the component is mounted
     setInitialTransition(true)
   }, [])
-  console.log(animation)
+
   return (
     <div
       style={{
@@ -26,11 +25,10 @@ export default function DisplayElement({ element }: DisplayElementProps) {
         left: position.x,
         width,
         height,
-        position: 'absolute',
         opacity: initialTransition ? 1 : 0,
         transition: `opacity ${animation.duration} ${animation.css}`,
       }}
-      className={`hover:border absolute border-slate-800 border-dashed`}
+      className={`absolute`}
     >
       {typeof icon === 'string' ? (
         <Image

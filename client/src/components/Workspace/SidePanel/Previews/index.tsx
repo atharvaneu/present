@@ -18,7 +18,6 @@ export function Previews({ className }: PreviewsProps) {
       </TabPanel>
     )
   }
-  console.log(pages)
 
   return (
     <TabPanel>
@@ -69,7 +68,6 @@ function ButtonGroup({ className, visible, pageId }: ButtonGroupProps) {
 
   function handleDeleteSlide() {
     dispatch(deletePage(pageId))
-    console.log(pageId)
   }
 
   return (

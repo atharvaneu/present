@@ -30,7 +30,6 @@ export default function PlayPresentation({ className }: PlayPresentationProps) {
     } else if (key === 'b') {
       setFocusedPage((prev) => Math.max(0, prev - 1))
     }
-    console.log(e.key)
   }
 
   useEffect(() => {

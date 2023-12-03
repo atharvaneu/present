@@ -1,12 +1,15 @@
 import { ConnectDropTarget } from 'react-dnd'
 import { useDispatch, useSelector } from 'react-redux'
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Resizable } from 're-resizable'
 
 import { ContextMenuState, TElement, TPage } from '@/shared/types'
 import { Element } from './Element'
 import { ContextMenu } from './Element/ContextMenu'
-import { changeElementSize } from '@/redux/editor/editorSlice'
+import {
+  changeElementSize,
+  setEditorProperties,
+} from '@/redux/editor/editorSlice'
 
 const tmap: any = {
   1: 'bg-orange-100',
@@ -75,6 +78,7 @@ export function Page({ className, drop, page }: PageProps) {
     const workAreaElement = document.getElementById('workarea')
     if (workAreaElement) {
       const workAreaRect = workAreaElement?.getBoundingClientRect()
+
       dispatch(
         changeElementSize({
           width: `${Math.abs(workAreaRect.left - e.clientX)}px`,
