@@ -1,10 +1,10 @@
-import { configureStore } from "@reduxjs/toolkit";
-import pageReducer from "./editor/pageSlice";
-import editorReducer from "./editor/editorSlice";
+import { configureStore } from '@reduxjs/toolkit'
+import utilReducer from './editor/utilSlice'
+import editorReducer from './editor/editorSlice'
 
 export default configureStore({
   reducer: {
     editor: editorReducer,
-    page: pageReducer,
+    util: utilReducer,
   },
-});
+})

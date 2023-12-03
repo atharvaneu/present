@@ -4,6 +4,10 @@ import { createSlice, current } from '@reduxjs/toolkit'
 const initialState: EditorState = {
   pages: [],
   focusedPageId: 'NULL',
+  editor: {
+    top: 0,
+    left: 0,
+  },
 }
 
 export const editorSlice = createSlice({
@@ -34,7 +38,6 @@ export const editorSlice = createSlice({
           y: 0,
         },
       }
-      console.log('>>>> ', state?.pages?.length)
       const page: TPage = {
         id: `page-${state?.pages?.length + 1}`,
         layers: [],
@@ -80,8 +83,9 @@ export const editorSlice = createSlice({
       }
 
       const element = targetPage.elements.filter((p) => p?.id === elementId)[0]
-      element.position.x = payload.x
-      element.position.y = payload.y
+
+      element.position.x = payload.x - state.editor.left
+      element.position.y = payload.y - state.editor.top
     },
 
     deletePage: (state: EditorState, action) => {
@@ -101,6 +105,25 @@ export const editorSlice = createSlice({
         ...state,
         pages: payload,
       }
+    },
+
+    setEditorProperties: (state: EditorState, action) => {
+      const { payload } = action
+
+      const { top, left } = payload
+      console.log(top, left)
+
+      state.editor.left = left
+      state.editor.top = top
+
+      // return {
+      //   ...state,
+      //   editor: {
+      //     ...state?.editor,
+      //     top,
+      //     left,
+      //   },
+      // }
     },
 
     changeElementSize: (state: EditorState, action) => {
@@ -148,6 +171,7 @@ export const {
   changeElementSize,
   loadPages,
   addAnimation,
+  setEditorProperties,
   deletePage,
 } = editorSlice.actions
 
