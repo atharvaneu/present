@@ -33,6 +33,8 @@ export default function Login() {
   })
   const [loading, setLoading] = useState<boolean>(false)
 
+  const SERVER_DOMAIN =
+    process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   async function handleLogin() {
     // Validation start
     if (!/^\S+@\S+\.\S+$/.test(formData?.email)) {
@@ -56,7 +58,7 @@ export default function Login() {
     // Validation end
 
     setLoading(true)
-    const res = await fetch(`/api/user/login`, {
+    const res = await fetch(`${SERVER_DOMAIN}/api/user/login`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
