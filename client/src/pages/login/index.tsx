@@ -57,6 +57,7 @@ export default function Login() {
     }
     // Validation end
 
+    console.log(SERVER_DOMAIN)
     setLoading(true)
     const res = await fetch(`${SERVER_DOMAIN}/api/user/login`, {
       method: 'POST',
