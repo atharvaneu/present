@@ -41,7 +41,7 @@ export default function App() {
   }, [])
 
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen bg-stone-900 text-stone-200">
       <Topbar presentationName={presentationName} />
       <Workspace />
     </section>

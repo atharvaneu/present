@@ -65,6 +65,7 @@ export default function Login() {
     })
 
     const data = await res.json()
+    console.log(data)
 
     setLoading(false)
 
@@ -100,7 +101,7 @@ export default function Login() {
   }
 
   return (
-    <section className="w-full h-screen flex align-middle justify-center">
+    <section className="w-full h-screen flex align-middle justify-center bg-stone-900">
       <Center>
         <Card maxW="md" className="">
           <CardHeader>

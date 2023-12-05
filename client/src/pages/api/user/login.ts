@@ -19,6 +19,7 @@ export default async function handler(
       const { email, password } = body
 
       const user = await User.findOne({ email })
+
       if (!user) {
         res
           .status(403)

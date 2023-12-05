@@ -71,7 +71,6 @@ export default function MyStuff() {
     const data = await res.json()
 
     populatePresentations()
-    console.log(data)
   }
 
   async function handleRemove(pid: string) {
@@ -83,7 +82,7 @@ export default function MyStuff() {
   }
 
   return (
-    <section className="w-full h-screen flex align-middle justify-center">
+    <section className="w-full h-screen flex align-middle justify-center bg-stone-900">
       <Card className="my-20 w-2/4">
         <CardHeader className="flex justify-between">
           <Text>My presentations</Text>

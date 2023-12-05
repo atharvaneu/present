@@ -88,16 +88,24 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
         <Tooltip label="create a new slide">
           <Button onClick={() => handleClick('add')}>new slide</Button>
         </Tooltip>
-        <Tooltip label="create a new slide">
+        <Tooltip label="share it with a friend">
           <Button onClick={() => handleClick('delete')}>share</Button>
         </Tooltip>
-        <Tooltip label="create a new slide">
-          <Button onClick={() => handleClick('save')} variant="ghost">
+        <Tooltip label="save presentation">
+          <Button
+            onClick={() => handleClick('save')}
+            variant="ghost"
+            className="bg-green-700 hover:bg-green-800"
+          >
             save
           </Button>
         </Tooltip>
-        <Tooltip label="create a new slide">
-          <Button onClick={() => handleClick('preview')} variant="ghost">
+        <Tooltip label="preview this presentation">
+          <Button
+            onClick={() => handleClick('preview')}
+            variant="ghost"
+            className="bg-blue-700 hover:bg-blue-800"
+          >
             preview
           </Button>
         </Tooltip>
