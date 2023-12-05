@@ -27,7 +27,7 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
     process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   async function sendPresentation() {
     // if (pages?.length === 0) return
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/edit`, {
+    const res = await fetch(`/api/presentation/edit`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

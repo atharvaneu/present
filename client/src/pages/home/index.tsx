@@ -25,7 +25,7 @@ export default function MyStuff() {
   const SERVER_DOMAIN =
     process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   async function populatePresentations() {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/user/${userID}`) // cache this in the future
+    const res = await fetch(`/api/presentation/user/${userID}`) // cache this in the future
     const data = await res.json()
 
     setPresentations(() => data?.body)
@@ -52,7 +52,7 @@ export default function MyStuff() {
     hour12: true,
   }
   async function handleAddNewPresentation() {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/create`, {
+    const res = await fetch(`/api/presentation/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +74,7 @@ export default function MyStuff() {
   }
 
   async function handleRemove(pid: string) {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/${pid}`, {
+    const res = await fetch(`/api/presentation/${pid}`, {
       method: 'DELETE',
     })
 
