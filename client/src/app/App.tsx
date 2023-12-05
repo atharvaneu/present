@@ -14,13 +14,12 @@ const { log } = console
 
 export default function App() {
   const [presentationName, setPresentationName] = useState<string>('')
-  const SERVER_DOMAIN = process.env.SERVER_DOMAIN || 'http://localhost:3000'
 
   const dispatch = useDispatch()
   const params = useParams()
 
   async function fetchPresentation() {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/${params?.pid}`)
+    const res = await fetch(`/api/presentation/${params?.pid}`)
     const data = await res.json()
 
     dispatch(loadPages(data?.body?.pages))

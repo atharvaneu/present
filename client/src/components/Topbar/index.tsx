@@ -15,8 +15,6 @@ export interface TopbarProps {
 }
 
 export default React.memo(function Topbar({ presentationName }: TopbarProps) {
-  const SERVER_DOMAIN = process.env.SERVER_DOMAIN || 'http://localhost:3000'
-
   const router = useRouter()
   const toast = useToast()
   const params = useParams()
@@ -27,7 +25,7 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
 
   async function sendPresentation() {
     // if (pages?.length === 0) return
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/edit`, {
+    const res = await fetch(`/api/presentation/edit`, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json',

@@ -16,8 +16,6 @@ import { useEffect, useState } from 'react'
 import { AlertDialogBox } from '@/components/utils/AlertDialogue'
 import { DialogBox } from '@/components/utils/Dialogue'
 
-const SERVER_DOMAIN = process.env.SERVER_DOMAIN || 'http://localhost:3000'
-
 export default function MyStuff() {
   const [newPresentationName, setNewPresentationName] = useState<string>('')
   const [presentations, setPresentations] = useState<any>([])
@@ -52,7 +50,7 @@ export default function MyStuff() {
     hour12: true,
   }
   async function handleAddNewPresentation() {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/create`, {
+    const res = await fetch(`/api/presentation/create`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -74,7 +72,7 @@ export default function MyStuff() {
   }
 
   async function handleRemove(pid: string) {
-    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/${pid}`, {
+    const res = await fetch(`/api/presentation/${pid}`, {
       method: 'DELETE',
     })
 
