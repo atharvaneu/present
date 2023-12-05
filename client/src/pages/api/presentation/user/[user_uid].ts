@@ -2,10 +2,7 @@ import type { NextApiRequest, NextApiResponse } from 'next'
 import dbConnect from '@/server/lib/dbConnect'
 import Presentation from '@/server/models/Presentation'
 
-export default async function handler(
-  req: NextApiRequest,
-  res: NextApiResponse,
-) {
+export async function handler(req: NextApiRequest, res: NextApiResponse) {
   const { user_uid } = req.query
 
   const {
