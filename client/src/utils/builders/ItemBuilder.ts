@@ -10,6 +10,7 @@ class ItemBuilder {
       animation: {
         name: '',
         css: '',
+        duration: '300ms',
       },
       position: {
         x: 0,

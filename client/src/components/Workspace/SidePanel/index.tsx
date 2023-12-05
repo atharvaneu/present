@@ -1,15 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-"use client";
+'use client'
 
-import React from "react";
-import { Tab, TabList, TabPanels, Tabs } from "@chakra-ui/react";
+import React from 'react'
+import { Tab, TabList, TabPanels, Tabs } from '@chakra-ui/react'
 
-import { Animations } from "./Animations";
-import { Previews } from "./Previews";
-import ToolBox from "./ToolBox";
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/shadcn/ui/tabs'
+
+import { Animations } from './Animations'
+import { Previews } from './Previews'
+import ToolBox from './ToolBox'
 
 export interface SidePanelProps {
-  className?: string;
+  className?: string
 }
 
 export function SidePanel({ className }: SidePanelProps) {
@@ -28,6 +30,23 @@ export function SidePanel({ className }: SidePanelProps) {
           <ToolBox />
         </TabPanels>
       </Tabs>
+      {/* <Tabs defaultValue="slides">
+        <TabsList className="grid w-full grid-cols-3">
+          <TabsTrigger value="slides">Slides</TabsTrigger>
+          <TabsTrigger value="animations">Animations</TabsTrigger>
+          <TabsTrigger value="toolbox">Toolbox</TabsTrigger>
+        </TabsList>
+
+        <TabsContent value="slides">
+          <Previews />
+        </TabsContent>
+        <TabsContent value="animations">
+          <Animations />
+        </TabsContent>
+        <TabsContent value="toolbox">
+          <ToolBox />
+        </TabsContent>
+      </Tabs> */}
     </div>
-  );
+  )
 }

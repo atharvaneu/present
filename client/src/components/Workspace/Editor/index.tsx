@@ -17,7 +17,7 @@ export const Editor = memo(function Editor({ className }: EditorProps) {
     (state: any) => state.editor,
   )
   const dispatch = useDispatch()
-  console.log(editor)
+
   const [{ canDrop, isOver }, drop] = useDrop(() => ({
     accept: 'TElement',
     drop: (item: TElement, monitor): TElementDropResult => {

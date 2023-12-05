@@ -19,25 +19,26 @@ export const editorSlice = createSlice({
     },
 
     addPage: (state: EditorState): EditorState => {
-      const element: TElement = {
-        animation: {
-          name: 'Ease in', /// these values will be given through the actions.payload
-          css: 'ease-in',
-        },
-        position: {
-          x: 30,
-          y: 50,
-        },
-        id: '0',
-        width: '300px',
-        height: '300px',
-        name: 'default',
-        icon: '',
-        mouseOffset: {
-          x: 0,
-          y: 0,
-        },
-      }
+      // const element: TElement = {
+      //   animation: {
+      //     name: 'Ease in', /// these values will be given through the actions.payload
+      //     css: 'ease-in',
+      //     duration: '300ms',
+      //   },
+      //   position: {
+      //     x: 30,
+      //     y: 50,
+      //   },
+      //   id: '0',
+      //   width: '300px',
+      //   height: '300px',
+      //   name: 'default',
+      //   icon: '',
+      //   mouseOffset: {
+      //     x: 0,
+      //     y: 0,
+      //   },
+      // }
       const page: TPage = {
         id: `page-${state?.pages?.length + 1}`,
         layers: [],
@@ -111,7 +112,6 @@ export const editorSlice = createSlice({
       const { payload } = action
 
       const { top, left } = payload
-      console.log(top, left)
 
       state.editor.left = left
       state.editor.top = top

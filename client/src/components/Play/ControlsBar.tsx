@@ -12,24 +12,24 @@ export default function ControlsBar({
 }: ControlsBarProps) {
   const controls = [
     {
-      icon: 'icons/previous.svg',
+      icon: '../icons/previous.svg',
       title: 'Previous',
       onClick: () => {
         setFocusedPage((prev) => Math.max(0, prev - 1))
       },
     },
     {
-      icon: 'icons/pause.svg',
+      icon: '../icons/pause.svg',
       title: 'Pause',
       onClick: () => {},
     },
     {
-      icon: 'icons/play.svg',
+      icon: '../icons/play.svg',
       title: 'Play',
       onClick: () => {},
     },
     {
-      icon: 'icons/forward.svg',
+      icon: '../icons/forward.svg',
       title: 'Next',
       onClick: () => {
         setFocusedPage((prev) => prev + 1)

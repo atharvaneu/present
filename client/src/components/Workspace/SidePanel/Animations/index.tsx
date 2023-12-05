@@ -15,17 +15,17 @@ const tools = [
   {
     name: 'Ease in',
     css: 'ease-in',
-    icon: 'icons/ease-in.svg',
+    icon: '../icons/ease-in.svg',
   },
   {
     name: 'Ease out',
     css: 'ease-out',
-    icon: 'icons/ease-out.svg',
+    icon: '../icons/ease-out.svg',
   },
   {
     name: 'Ease in out',
     css: 'ease-in-out',
-    icon: 'icons/ease-in-out.svg',
+    icon: '../icons/ease-in-out.svg',
   },
 ]
 

@@ -15,7 +15,7 @@ export interface ToolProps {
   icon: string
 }
 
-export const Tool = memo(function Tool({ className, name, icon }: ToolProps) {
+export const Tool = function Tool({ className, name, icon }: ToolProps) {
   const [element, setElement] = useState<TElement>()
 
   const [naturalDimensions, { loading, error }] = useImageSize(icon as string)
@@ -29,13 +29,15 @@ export const Tool = memo(function Tool({ className, name, icon }: ToolProps) {
       width: `${naturalDimensions?.width}px`,
       height: `${naturalDimensions?.height}px`,
     }
+
     dispatch(mountElement(item))
-  }, [naturalDimensions, element])
+  }, [naturalDimensions, element, dispatch])
 
   const item: TElement = {
     animation: {
       name: '',
       css: '',
+      duration: '',
     },
     position: {
       x: 0,
@@ -63,7 +65,7 @@ export const Tool = memo(function Tool({ className, name, icon }: ToolProps) {
         y = y ?? 0
 
         const _item = new ItemBuilder(name, icon, focusedPageId)
-          .withAnimation({ name: '', css: '' })
+          .withAnimation({ name: '', css: '', duration: '300ms' })
           .withPosition({ x, y })
           .build()
 
@@ -101,4 +103,4 @@ export const Tool = memo(function Tool({ className, name, icon }: ToolProps) {
       </div>
     </Tooltip>
   )
-})
+}

@@ -33,7 +33,7 @@ export interface TElementPosition {
 export interface TAnimation {
   name: string | null
   css: string
-  duration?: string
+  duration: string
 }
 
 export interface TElementDropResult {

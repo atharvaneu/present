@@ -77,7 +77,12 @@ function ButtonGroup({ className, visible, pageId }: ButtonGroupProps) {
       } transition duration-150 hover:scale-[1.06] hover:bg-slate-200 p-1 rounded-md ${className}`}
     >
       <button onClick={() => handleDeleteSlide()}>
-        <img src="icons/delete.svg" width={15} height={15} alt="Delete icon" />
+        <img
+          src="../icons/delete.svg"
+          width={15}
+          height={15}
+          alt="Delete icon"
+        />
       </button>
     </div>
   )

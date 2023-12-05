@@ -1,9 +1,10 @@
 import { TPage } from '@/shared/types'
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import DisplayPage from './components/DisplayPage'
+import DisplayPage from '../../components/Play/DisplayPage'
 import { useToast } from '@chakra-ui/react'
-import ControlsBar from './components/ControlsBar'
+import ControlsBar from '../../components/Play/ControlsBar'
+import { useParams } from 'next/navigation'
 
 export interface PlayPresentationProps {
   className?: string
@@ -12,15 +13,16 @@ export interface PlayPresentationProps {
 export default function PlayPresentation({ className }: PlayPresentationProps) {
   const [pages, setPages] = useState<TPage[]>([])
   const [focusedPage, setFocusedPage] = useState<number>(0)
+
+  const params = useParams()
   const toast = useToast()
 
-  const SERVER_DOMAIN = 'http://localhost:8080'
+  const SERVER_DOMAIN = process.env.SERVER_DOMAIN || 'http://localhost:3000'
 
   async function fetchPresentation() {
-    const res = await fetch(`${SERVER_DOMAIN}/fetch-presentation`)
-
+    const res = await fetch(`${SERVER_DOMAIN}/api/presentation/${params?.pid}`)
     const data = await res.json()
-    setPages((prev) => data)
+    setPages(() => data?.body?.pages)
   }
 
   function handleKeyPress(e: KeyboardEvent) {
@@ -40,7 +42,7 @@ export default function PlayPresentation({ className }: PlayPresentationProps) {
     return () => {
       document.removeEventListener('keypress', handleKeyPress)
     }
-  }, [])
+  }, [params])
 
   return (
     <div>

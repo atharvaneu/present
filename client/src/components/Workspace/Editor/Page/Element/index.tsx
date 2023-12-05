@@ -1,11 +1,11 @@
 import Image from 'next/image'
 import { useDispatch, useSelector } from 'react-redux'
 import { DragSourceMonitor, useDrag, useDrop } from 'react-dnd'
+import { useRef } from 'react'
 
 import { TElement } from '@/shared/types'
 import { addAnimation, setEditorProperties } from '@/redux/editor/editorSlice'
-import { setMouseCoords } from '@/redux/editor/utilSlice'
-import { useRef } from 'react'
+import ContextMenu from './ContextMenuRightClick'
 
 export interface ElementProps {
   element: TElement
@@ -24,14 +24,12 @@ export function Element({
   const dispath = useDispatch()
 
   const { id, icon, position, width, height, name } = element
-  const { x, y } = position
 
   const [{ isDragging }, elementDrag, preview] = useDrag(
     () => ({
       type: 'TElement',
       item: element,
       collect: (monitor: DragSourceMonitor) => {
-        dispath(setMouseCoords({ x: 4, y: 9 }))
         return {
           isDragging: monitor.isDragging(),
         }
@@ -40,7 +38,7 @@ export function Element({
         // console.log(draggedItem)
       },
     }),
-    [id, x, y, name],
+    [id, position?.x, position?.y, name],
   )
 
   const [, drop] = useDrop({
@@ -53,10 +51,6 @@ export function Element({
   function onMouseDown(e: any, x: number, y: number) {
     const W = parseInt(width.substring(0, width.length - 2))
     const boundingRect = elementBox.current?.getBoundingClientRect()
-
-    // console.log(
-    //   `W: ${W}, Mouse: ${e.clientX}, Rect: ${boundingRect?.left as number}`,
-    // )
 
     const offsetX = e.clientX - (boundingRect?.left as number)
     const offsetY = e.clientY - (boundingRect?.top as number)
@@ -78,16 +72,16 @@ export function Element({
         return elementDrag(drop(node))
       }}
       style={{
-        top: position.y,
-        left: position.x,
+        top: position?.y,
+        left: position?.x,
         width,
         height,
       }}
       className={`hover:border border-slate-800 border-dashed ${className}`}
       onClick={onLeftClick}
-      onContextMenu={onRightClick}
       onMouseDown={(e) => onMouseDown(e, position.x, position.y)}
     >
+      {/* <ContextMenu animation={element?.animation}> */}
       {typeof icon === 'string' ? (
         <Image
           className="mx-auto text-xs"
@@ -99,6 +93,7 @@ export function Element({
       ) : (
         icon
       )}
+      {/* </ContextMenu> */}
     </div>
   )
 }

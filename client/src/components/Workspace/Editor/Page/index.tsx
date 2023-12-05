@@ -5,7 +5,7 @@ import { Resizable } from 're-resizable'
 
 import { ContextMenuState, TElement, TPage } from '@/shared/types'
 import { Element } from './Element'
-import { ContextMenu } from './Element/ContextMenu'
+import ContextMenu from './Element/ContextMenuRightClick'
 import {
   changeElementSize,
   setEditorProperties,
@@ -98,26 +98,25 @@ export function Page({ className, drop, page }: PageProps) {
     >
       {targetPage?.elements?.map((element) => (
         <Resizable
-          key={element.id}
+          key={element?.id}
           style={{
             position: 'absolute',
-            top: element.position.y,
-            left: element.position.x,
+            top: element?.position?.y,
+            left: element?.position?.x,
           }}
-          defaultSize={{ width: element.width, height: element.height }}
+          defaultSize={{ width: element?.width, height: element?.height }}
           onResize={(e) => {
             handleResize(e, element)
           }}
         >
           <Element
-            key={element.id}
+            key={element?.id}
             element={element}
             onLeftClick={handleLeftClick}
             onRightClick={handleRightClick}
           />
         </Resizable>
       ))}
-      <ContextMenu initSettings={contextMenuState} />
     </div>
   )
 }
