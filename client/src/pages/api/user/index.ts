@@ -24,6 +24,4 @@ export default async function handler(
       res.status(400).json({ success: false })
       break
   }
-
-  res.status(200).send({ result: 'WORKING BOI' })
 }

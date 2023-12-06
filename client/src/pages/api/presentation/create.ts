@@ -2,7 +2,10 @@ import dbConnect from '@/server/lib/dbConnect'
 import Presentation from '@/server/models/Presentation'
 import type { NextApiRequest, NextApiResponse } from 'next'
 
-export async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   const {
     query: { id },
     method,
@@ -33,6 +36,4 @@ export async function handler(req: NextApiRequest, res: NextApiResponse) {
       res.status(400).json({ success: false })
       break
   }
-
-  res.status(200).send({ result: 'WORKING BOI' })
 }
