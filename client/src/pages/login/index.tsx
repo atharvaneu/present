@@ -67,7 +67,6 @@ export default function Login() {
     })
 
     const data = await res.json()
-    console.log(data)
 
     setLoading(false)
 
@@ -92,6 +91,7 @@ export default function Login() {
     // add user to localstorage
 
     store('user_id', data?.body?._id)
+    store('user_name', data?.body?.firstName)
     toast({
       title: `Welcome back, ${data?.body?.firstName}`,
       status: 'success',
@@ -107,7 +107,7 @@ export default function Login() {
       <Center>
         <Card maxW="md" className="">
           <CardHeader>
-            <Heading>Welcome back</Heading>
+            <Heading className="text-stone-900">Welcome back</Heading>
           </CardHeader>
           <CardBody>
             <Text>Email</Text>

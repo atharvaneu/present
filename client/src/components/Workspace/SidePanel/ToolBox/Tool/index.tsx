@@ -30,8 +30,12 @@ export const Tool = function Tool({ className, name, icon }: ToolProps) {
       height: `${naturalDimensions?.height}px`,
     }
 
+    // if (!('animation' in item)) {
+    //   return
+    // }
+
     dispatch(mountElement(item))
-  }, [naturalDimensions, element, dispatch])
+  }, [naturalDimensions, element])
 
   const item: TElement = {
     animation: {

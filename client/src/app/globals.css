@@ -8,6 +8,10 @@
 * {
   font-family: 'Inter', sans-serif;
 }
+
+.font-heading {
+  font-family: 'Dela Gothic One', sans-serif;
+}
  
 @layer base {
   :root {

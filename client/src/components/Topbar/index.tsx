@@ -23,8 +23,6 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
   const { pages } = useSelector((state: any) => state.editor)
   const dispatch = useDispatch()
 
-  const SERVER_DOMAIN =
-    process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   async function sendPresentation() {
     // if (pages?.length === 0) return
     const res = await fetch(`/api/presentation/edit`, {
@@ -39,7 +37,6 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
         pages,
       }),
     })
-    const data = await res.json()
   }
 
   function handleClick(operation: 'add' | 'delete' | 'save' | 'preview') {
@@ -101,23 +98,33 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
           </Button>
         </Tooltip>
         <Tooltip label="preview this presentation">
-          <Button
-            onClick={() => handleClick('preview')}
-            variant="ghost"
-            className="bg-blue-700 hover:bg-blue-800"
-          >
-            preview
-          </Button>
+          <a href={`/play/${params?.pid}`} target="_blank">
+            <Button
+              onClick={() => handleClick('preview')}
+              variant="ghost"
+              className="bg-blue-700 hover:bg-blue-800"
+            >
+              preview
+            </Button>
+          </a>
         </Tooltip>
       </div>
       <div>
         <Stack spacing={4} direction="row" align="center">
-          <ModeToggle />
-          <Button variant="link" onClick={() => router.push('/home')}>
+          {/* <ModeToggle /> */}
+          <Button
+            variant="link"
+            onClick={() => router.push('/home')}
+            className="text-stone-200"
+          >
             Home
           </Button>
-          <Button variant="link">Settings</Button>
-          <Button variant="link" onClick={() => handleLogout()}>
+          {/* <Button variant="link">Settings</Button> */}
+          <Button
+            variant="link"
+            className="text-stone-200"
+            onClick={() => handleLogout()}
+          >
             Logout
           </Button>
         </Stack>
