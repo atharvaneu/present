@@ -16,11 +16,11 @@ export default async function handler(
 
   switch (method) {
     case 'POST':
-      const { firstname, lastname, email, password } = body
+      const { firstName, lastName, email, password } = body
 
       const dbData = new User({
-        firstname,
-        lastname,
+        firstName,
+        lastName,
         email,
         password,
       })
@@ -29,7 +29,7 @@ export default async function handler(
         await dbData.save()
         res.status(200).json({ success: true })
       } catch (e) {
-        res.status(400).json({ success: false })
+        res.status(400).json({ success: false, error: e.message })
         console.log(e);
       }
 

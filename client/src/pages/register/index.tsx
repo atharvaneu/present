@@ -50,7 +50,12 @@ export default function Register() {
       })
       return
     }
-    if (formData?.email.length === 0 || formData?.password.length === 0) {
+    if (
+      formData?.firstName.length === 0 ||
+      formData?.lastName.length === 0 ||
+      formData?.email.length === 0 ||
+      formData?.password.length === 0
+    ) {
       toast({
         title: 'Please enter all details',
         status: 'error',
@@ -124,7 +129,7 @@ export default function Register() {
                 setFormData((prev) => {
                   return {
                     ...prev,
-                    firstname: e.target.value,
+                    firstName: e.target.value,
                   }
                 })
               }
@@ -140,7 +145,7 @@ export default function Register() {
                 setFormData((prev) => {
                   return {
                     ...prev,
-                    lastnamename: e.target.value,
+                    lastName: e.target.value,
                   }
                 })
               }
