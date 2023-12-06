@@ -93,6 +93,7 @@ export default function MyStuff() {
 
   function handleLogout() {
     store.remove('user_id')
+    store.remove('user_name')
 
     router.push('/login')
   }

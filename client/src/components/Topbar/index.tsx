@@ -68,6 +68,7 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
 
   function handleLogout() {
     store.remove('user_id')
+    store.remove('user_name')
 
     router.push('/login')
   }
