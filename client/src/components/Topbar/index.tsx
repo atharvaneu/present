@@ -39,7 +39,7 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
     })
   }
 
-  function handleClick(operation: 'add' | 'delete' | 'save' | 'preview') {
+  function handleClick(operation: 'add' | 'delete' | 'save' | 'preview'| 'download') {
     switch (operation) {
       case 'add':
         dispatch(addPage())
@@ -106,6 +106,17 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
               className="bg-blue-700 hover:bg-blue-800"
             >
               preview
+            </Button>
+          </a>
+        </Tooltip>
+        <Tooltip label="download this presentation">
+          <a href={fileName} download={fileName} target='_blank'>
+            <Button
+              onClick={() => handleClick('download')}
+              variant="solid"
+              colorScheme="messenger"
+            >
+              download
             </Button>
           </a>
         </Tooltip>
