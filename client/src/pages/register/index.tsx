@@ -108,7 +108,7 @@ export default function Register() {
       isClosable: false,
     })
 
-    router.push('/home')
+    router.push('/login')
   }
 
   return (
@@ -203,7 +203,7 @@ export default function Register() {
               onClick={() => handleLogin()}
               isLoading={loading}
             >
-              Login
+              Register
             </Button>
           </CardFooter>
         </Card>
