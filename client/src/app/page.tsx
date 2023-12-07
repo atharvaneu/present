@@ -1,12 +1,15 @@
 import { ChakraProvider } from '@chakra-ui/react'
-
-import store from '../redux/store'
-import { Provider } from 'react-redux'
-import App from './App'
+// import Index from '@/components/Navbar'
+// import Lindex from '@/components/Landing-info'
+import Landing from '@/pages/landing'
 
 export default function HomeOne() {
   return (
-    <div>This is a nulla div</div>
+    <>
+    <Landing />
+    </>
+    // {/* <Index />
+    //   <Lindex /> */}
     // <ChakraProvider>
     //   <Provider store={store}>
     //     <App />
