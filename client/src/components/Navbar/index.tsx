@@ -4,8 +4,15 @@ import React from 'react'
 import './index.css'
 // import { Button } from '@/shadcn/ui/button'
 import { Button } from '@/shadcn/ui/button'
+import { useRouter } from 'next/router'
 
-const index = () => {
+export default function index() {
+  const router = useRouter()
+  const SERVER_DOMAIN =
+    process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
+  async function handleRegister() {
+    router.push('/register')
+  }
   return (
     <>
       <div className="navbar-container">
@@ -26,7 +33,9 @@ const index = () => {
           </nav>
         </div>
         <div className="nav-buttons">
-          <Button className="button-style">Sign Up</Button>
+          <Button className="button-style" onClick={handleRegister}>
+            Sign Up
+          </Button>
           <Button className="button-style">Sign In</Button>
         </div>
       </div>
@@ -34,4 +43,4 @@ const index = () => {
   )
 }
 
-export default index
+

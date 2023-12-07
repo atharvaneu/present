@@ -1,13 +1,15 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import Index from '@/components/Navbar'
-import Lindex from '@/components/Landing-info'
+// import Index from '@/components/Navbar'
+// import Lindex from '@/components/Landing-info'
+import Landing from '@/pages/landing'
 
 export default function HomeOne() {
   return (
     <>
-      <Index />
-      <Lindex />
+    <Landing />
     </>
+    // {/* <Index />
+    //   <Lindex /> */}
     // <ChakraProvider>
     //   <Provider store={store}>
     //     <App />
