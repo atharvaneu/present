@@ -52,6 +52,11 @@ li {
     transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
 }
 
+button {
+    text-decoration: none;
+    color: #000;
+
+}
 .button-style:hover {
     color: #000;
     background-color: #21BCC0;

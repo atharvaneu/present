@@ -6,6 +6,7 @@ import { Button } from '@/shadcn/ui/button'
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Bgimage from '../../images/backg-image.jpg'
+import Link from 'next/link'
 // import './index.css'
 
 export default function Landing() {
@@ -15,7 +16,8 @@ export default function Landing() {
   // const SERVER_DOMAIN =
   //   process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   // async function handleRegister() {
-  //   router.push('/register')
+  //   // router.push('/register')
+  //   console.log('register')
   // }
   return (
     <>
@@ -29,17 +31,27 @@ export default function Landing() {
           <nav>
             <div>
               <ul className="nav-links">
-                <li>Home</li>
-                <li>About</li>
-                <li>Contact</li>
+                <li>
+                  <Link href="/">Home</Link>
+                </li>
+                <li>
+                  <Link href="/about">About</Link>
+                </li>
+                <li>
+                  <Link href="/contact">Contact</Link>
+                </li>
               </ul>
             </div>
           </nav>
         </div>
         <div className="nav-buttons">
           {/* <Button className="button-style" onClick={handleRegister}> */}
-          <Button className="button-style">Sign Up</Button>
-          <Button className="button-style">Sign In</Button>
+          <button className="button-style">
+            <Link href="/register">Sign Up</Link>
+          </button>
+          <Button className="button-style">
+            <Link href="/login">Sign In</Link>
+          </Button>
         </div>
       </div>
       <section>
