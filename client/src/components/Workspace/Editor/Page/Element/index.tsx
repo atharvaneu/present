@@ -77,7 +77,7 @@ export function Element({
         width,
         height,
       }}
-      className={`hover:border border-slate-800 border-dashed ${className}`}
+      className={`${className}`}
       onClick={onLeftClick}
       onMouseDown={(e) => onMouseDown(e, position.x, position.y)}
     >

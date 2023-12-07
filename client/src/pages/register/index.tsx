@@ -119,7 +119,7 @@ export default function Register() {
   return (
     <section className="w-full h-screen flex align-middle justify-center bg-stone-900">
       <Center>
-        <Card maxW="md" className="">
+        <Card maxW="md" className="md:mx-0 mx-4">
           <CardHeader>
             <Heading
               className="text-stone-900"

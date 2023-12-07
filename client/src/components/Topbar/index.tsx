@@ -9,6 +9,7 @@ import { useRouter } from 'next/navigation'
 import { ModeToggle } from '../utils/ModeToggle'
 import { Button } from '@/shadcn/ui/button'
 import { Input } from '@/shadcn/ui/input'
+import { AlertDialog } from '@/shadcn/ui/alert-dialog'
 
 export interface TopbarProps {
   presentationName: string
@@ -39,7 +40,9 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
     })
   }
 
-  function handleClick(operation: 'add' | 'delete' | 'save' | 'preview'| 'download') {
+  function handleClick(
+    operation: 'add' | 'delete' | 'save' | 'preview' | 'download',
+  ) {
     switch (operation) {
       case 'add':
         dispatch(addPage())
@@ -86,9 +89,9 @@ export default React.memo(function Topbar({ presentationName }: TopbarProps) {
         <Tooltip label="create a new slide">
           <Button onClick={() => handleClick('add')}>new slide</Button>
         </Tooltip>
-        <Tooltip label="share it with a friend">
+        {/* <Tooltip label="share it with a friend">
           <Button onClick={() => handleClick('delete')}>share</Button>
-        </Tooltip>
+        </Tooltip> */}
         <Tooltip label="save presentation">
           <Button
             onClick={() => handleClick('save')}
