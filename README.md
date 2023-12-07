@@ -1,6 +1,6 @@
-# Presentation App(Temporary COntent Will change later)
+# Present - A better way to present
 
-This application is a presentation tool resembling a PowerPoint-like interface, built using TypeScript, JavaScript, and Node.js.
+Presentation platform that focuses on ease of user for creating presentations and share with just a link
 
 ## Features
 
@@ -13,8 +13,10 @@ This application is a presentation tool resembling a PowerPoint-like interface, 
 ## Technologies Used
 
 - TypeScript
-- JavaScript
+- Next.js (React) and API routes
 - Node.js
+- MongoDB
+- Vercel (deployment)
 
 ## Installation
 
@@ -22,7 +24,7 @@ To run this application locally, follow these steps:
 
 1. Clone the repository.
 2. Install dependencies using `npm install`.
-3. Start the application with `npm start`.
+3. Start the application with `cd client && npm start`.
 
 ## Usage
 
@@ -32,8 +34,6 @@ To run this application locally, follow these steps:
 
 ## Contributors
 
-- [Your Name](link to your profile) - Role (e.g., Developer, Designer)
-
-## License
-
-This project is licensed under the [License Name] License - see the [LICENSE](link to license file) file for details.
+- [Atharva Kamble](https://github.com/atharvaneu)
+- [Gaurav Singh](https://github.com/sinhagaurav7)
+- [Govind Mudavadkar](https://github.com/GovindMNEU)
