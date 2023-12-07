@@ -23,13 +23,20 @@ export function SidePanel({ className }: SidePanelProps) {
           <Tab>Animations</Tab>
           <Tab>Toolbox</Tab>
         </TabList>
-
-        <TabPanels>
+      <TabPanels>
           <Previews />
           <Animations />
-          <ToolBox />
-        </TabPanels>
-      </Tabs>
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            width: '100%',
+            flexWrap: 'wrap',
+            }}>
+            <ToolBox />
+          </div>
+      </TabPanels>
+    </Tabs>
+
       {/* <Tabs defaultValue="slides">
         <TabsList className="grid w-full grid-cols-3">
           <TabsTrigger value="slides">Slides</TabsTrigger>
