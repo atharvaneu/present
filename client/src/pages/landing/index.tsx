@@ -24,7 +24,7 @@ export default function Landing() {
 
           <Button
             variant="link"
-            onClick={() => router.push('/aboutus')}
+            onClick={() => router.push('/contactus')}
             className="text-stone-200"
           >
             Contact us
