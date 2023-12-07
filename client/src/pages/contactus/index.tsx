@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import {
   Box,
   Heading,
@@ -7,7 +7,8 @@ import {
   Link,
   Divider,
   Text,
-} from '@chakra-ui/react';
+  Center,
+} from '@chakra-ui/react'
 
 function ContactUs() {
   return (
@@ -19,36 +20,46 @@ function ContactUs() {
       display="flex"
       flexDirection="column"
     >
-      <Box flex="1"> {/* This Box will hold the main content */}
+      <Box flex="1">
+        {' '}
+        {/* This Box will hold the main content */}
         <Heading as="h1" mb="4">
           Contact Us
         </Heading>
         <Box>
           <Heading as="h2" size="md" mb="2">
-            Our Team
+            Our Team - Feel free to drop us a mail if you come across a bug or
+            want a feature added
           </Heading>
-          <List styleType="none" ml="0" mb="4">
-            <ListItem>
+          <List styleType="none" ml="0" mb="4" mt="5">
+            <ListItem mt={5}>
               <strong>Govind</strong>:{' '}
-              <Link href="mailto:govind@example.com">govind@example.com</Link>
+              <Link href="mailto:mudavadkar.g@northeastern.edu">
+                mudavadkar.g@northeastern.edu
+              </Link>
             </ListItem>
-            <ListItem>
-              <strong>Atharv</strong>:{' '}
-              <Link href="mailto:atharv@example.com">atharv@example.com</Link>
+            <ListItem mt={5}>
+              <strong>Atharva</strong>:{' '}
+              <Link href="mailto:kamble.ath@northeastern.edu">
+                kamble.ath@northeastern.edu
+              </Link>
             </ListItem>
-            <ListItem>
+            <ListItem mt={5}>
               <strong>Gaurav</strong>:{' '}
-              <Link href="mailto:gaurav@example.com">gaurav@example.com</Link>
+              <Link href="mailto:sinha.g@northeastern.edu">
+                sinha.g@northeastern.edu
+              </Link>
             </ListItem>
           </List>
         </Box>
-        <Divider my="4" />
       </Box>
       <footer>
-        <Text textAlign="center">&copy; 2023 Present-A better way to present. All rights reserved.</Text>
+        <Text textAlign="center">
+          &copy; 2023 Present-A better way to present. All rights reserved.
+        </Text>
       </footer>
     </Box>
-  );
+  )
 }
 
-export default ContactUs;
+export default ContactUs

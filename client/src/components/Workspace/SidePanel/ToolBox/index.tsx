@@ -18,6 +18,7 @@ export default function ToolBox({ className }: ToolBoxProps) {
         <Tool name={'Michael Noooo'} icon={'/michel_noooo.jpg'} />
         <Tool name={'Stanley'} icon={'/stanley.jpg'} />
         <Tool name={'Dwight'} icon={'/dwight.jpg'} />
+        <Tool name={'Text'} icon={'/letter_t.svg'} />
       </div>
     </TabPanel>
   )

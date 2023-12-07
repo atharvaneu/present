@@ -1,13 +1,14 @@
-import React from 'react';
-import { Box, Heading, Image, Text } from '@chakra-ui/react';
-import { StaticImageData } from 'next/image';
-import userImage from '../../assets/download.jpg';
+import React from 'react'
+import { Box, Heading, Image, Text } from '@chakra-ui/react'
+import { StaticImageData } from 'next/image'
+import userImage from '../../assets/download.jpg'
+import LandingInfo from '@/components/Landing-info'
 
 interface TeamMemberProps {
-  name: string;
-  imgSrc: StaticImageData;
-  altText: string;
-  description: string;
+  name: string
+  imgSrc: StaticImageData
+  altText: string
+  description: string
 }
 
 const TeamMember: React.FC<TeamMemberProps> = ({
@@ -23,7 +24,13 @@ const TeamMember: React.FC<TeamMemberProps> = ({
     padding="10px"
     overflow="hidden"
   >
-    <Image src={imgSrc.src} alt={altText} boxSize="100px" borderRadius="full" marginRight="10px" />
+    <Image
+      src={imgSrc.src}
+      alt={altText}
+      boxSize="100px"
+      borderRadius="full"
+      marginRight="10px"
+    />
     <Box>
       <Heading as="h2" size="md" marginBottom="5px">
         {name}
@@ -31,42 +38,42 @@ const TeamMember: React.FC<TeamMemberProps> = ({
       <Text>{description}</Text>
     </Box>
   </Box>
-);
+)
 
 function AboutUs() {
   const teamMembers: TeamMemberProps[] = [
     {
       name: 'Govind M',
-      imgSrc: userImage ,
+      imgSrc: userImage,
       altText: 'Govind',
       description:
         'Govind is an enthusiastic member of our team, dedicated to delivering excellence in every project.',
     },
     {
       name: 'Atharv K',
-      imgSrc: userImage ,
+      imgSrc: userImage,
       altText: 'Atharv',
       description:
         'Atharv is passionate about creativity and innovation, striving to achieve the best results.',
     },
     {
       name: 'Gaurav S',
-      imgSrc: userImage ,
+      imgSrc: userImage,
       altText: 'Gaurav',
       description:
         'Gaurav brings a wealth of experience, ensuring smooth operations and successful outcomes.',
     },
-  ];
+  ]
 
   return (
-    <>
+    <section className="w-full h-screen bg-stone-900 text-stone-300">
       <meta charSet="UTF-8" />
       <title>About Us</title>
-      <Box padding="20px" backgroundColor="black" color="white">
-        <Heading as="h1" size="xl" marginBottom="20px">
-          About Us
-        </Heading>
-        <Box className="team-members">
+      <Heading as="h1" size="xl" marginBottom="20px" className="text-center">
+        About Us
+      </Heading>
+      <LandingInfo />
+      {/* <Box className="team-members">
           {teamMembers.map((member, index) => (
             <TeamMember
               key={index}
@@ -76,13 +83,12 @@ function AboutUs() {
               description={member.description}
             />
           ))}
-        </Box>
-        <footer>
-          <Text>&copy; 2023 YourCompanyName. All rights reserved.</Text>
-        </footer>
-      </Box>
-    </>
-  );
+        </Box> */}
+      <footer style={{ position: 'fixed', bottom: '0' }}>
+        <Text>&copy; 2023 YourCompanyName. All rights reserved.</Text>
+      </footer>
+    </section>
+  )
 }
 
-export default AboutUs;
+export default AboutUs
