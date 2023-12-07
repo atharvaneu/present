@@ -15,6 +15,7 @@ import {
 } from '@chakra-ui/react'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import '../register/index.css'
 
 interface TLoginFormData {
   firstName: string
@@ -116,13 +117,19 @@ export default function Register() {
       <Center>
         <Card maxW="md" className="">
           <CardHeader>
-            <Heading className="text-stone-900">Register Here</Heading>
+            <Heading
+              className="text-stone-900"
+              display="flex"
+              justifyContent="center"
+            >
+              Register Here
+            </Heading>
           </CardHeader>
           <CardBody>
             <Text>First Name</Text>
             <Input
               placeholder="Enter your first name"
-              className="mt-1"
+              className="mt-1 input-styling"
               size="md"
               value={formData?.firstName}
               onChange={(e) =>
@@ -138,7 +145,7 @@ export default function Register() {
             <Text>Last Name</Text>
             <Input
               placeholder="Enter your last name"
-              className="mt-1"
+              className="mt-1 input-styling"
               size="md"
               value={formData?.lastName}
               onChange={(e) =>
@@ -195,7 +202,7 @@ export default function Register() {
               </InputRightElement>
             </InputGroup>
           </CardBody>
-          <CardFooter>
+          <CardFooter display="flex" justifyContent="center">
             <Button
               _hover={{ color: '#EAEAEA', backgroundColor: '#373737' }}
               backgroundColor="#1C1C1C"

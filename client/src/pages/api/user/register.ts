@@ -29,7 +29,7 @@ export default async function handler(
         await dbData.save()
         res.status(200).json({ success: true })
       } catch (e) {
-        res.status(400).json({ success: false, error: e.message })
+        res.status(400).json({ success: false, error: e })
         console.log(e);
       }
 
