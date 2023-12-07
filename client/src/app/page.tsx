@@ -1,19 +1,21 @@
-import { ChakraProvider } from '@chakra-ui/react'
-// import Index from '@/components/Navbar'
-// import Lindex from '@/components/Landing-info'
-import Landing from '@/pages/landing'
+import { ChakraProvider, Button, Stack } from '@chakra-ui/react'
+// import { Button } from '@/shadcn/ui/button'
+import { ThemeProvider } from '@/shadcn/themeProvider'
 
-export default function HomeOne() {
+export default function Home() {
   return (
-    <>
-    <Landing />
-    </>
-    // {/* <Index />
-    //   <Lindex /> */}
-    // <ChakraProvider>
-    //   <Provider store={store}>
-    //     <App />
-    //   </Provider>
-    // </ChakraProvider>
+    <ThemeProvider
+      attribute="class"
+      defaultTheme="light"
+      enableSystem
+      disableTransitionOnChange
+    >
+      <ChakraProvider>
+        Please redirect to{' '}
+        <a className="font-bold" href="http://present-self.vercel.app/landing">
+          http://present-self.vercel.app/landing
+        </a>
+      </ChakraProvider>
+    </ThemeProvider>
   )
 }

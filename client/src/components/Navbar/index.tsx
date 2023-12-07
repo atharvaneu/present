@@ -6,7 +6,7 @@ import './index.css'
 import { Button } from '@/shadcn/ui/button'
 import { useRouter } from 'next/router'
 
-export default function index() {
+export default function Navbar() {
   const router = useRouter()
   const SERVER_DOMAIN =
     process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
@@ -42,5 +42,3 @@ export default function index() {
     </>
   )
 }
-
-

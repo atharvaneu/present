@@ -30,7 +30,7 @@ const index = () => {
                   Craft presentations effortlessly with our intuitive tools,
                   collaborate seamlessly with remote teams, and present with
                   style. Our platform is not just about conveying information;
-                  it's about making a statement with every slide. Immerse
+                  its about making a statement with every slide. Immerse
                   yourself in a brand that radiates happiness and excitement,
                   and let your presentations reflect that same effortless
                   elegance.

@@ -38,8 +38,6 @@ export default function Register() {
   })
   const [loading, setLoading] = useState<boolean>(false)
 
-  const SERVER_DOMAIN =
-    process.env.NEXT_PUBLIC_API_URL || `http://localhost:3000`
   async function handleLogin() {
     // Validation start
     if (!/^\S+@\S+\.\S+$/.test(formData?.email)) {
@@ -65,6 +63,35 @@ export default function Register() {
       })
       return
     }
+    if (formData?.password.length < 7) {
+      toast({
+        title: 'Password cannot be less than 7 characters',
+        status: 'error',
+        position: 'top',
+        isClosable: false,
+      })
+      return
+    }
+    if (
+      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(
+        formData?.password,
+      )
+    ) {
+      const msg =
+        'Invalid password. Please follow these rules:\n' +
+        '- At least 8 characters\n' +
+        '- At least one uppercase letter\n' +
+        '- At least one lowercase letter\n' +
+        '- At least one digit\n' +
+        '- At least one special character (@$!%*?&)'
+      toast({
+        title: msg,
+        status: 'error',
+        position: 'top',
+        isClosable: true,
+      })
+      return
+    }
     // Validation end
 
     setLoading(true)
@@ -79,31 +106,8 @@ export default function Register() {
     const data = await res.json()
 
     setLoading(false)
-
-    if (data?.error) {
-      if (data?.error.toLowerCase() === 'user_not_exist') {
-        toast({
-          title: 'User does not exist',
-          status: 'error',
-          position: 'top',
-          isClosable: false,
-        })
-      } else if (data?.error.toLowerCase() === 'password_not_match') {
-        toast({
-          title: 'Incorrect password',
-          status: 'error',
-          position: 'top',
-          isClosable: false,
-        })
-      }
-      return
-    }
-    // add user to localstorage
-
-    store('user_id', data?.body?._id)
-    store('user_name', data?.body?.firstName)
-    toast({
-      title: `Welcome back, ${data?.body?.firstName}`,
+    await toast({
+      title: `Account created successfully, you may login now`,
       status: 'success',
       position: 'top',
       isClosable: false,
@@ -126,7 +130,7 @@ export default function Register() {
             </Heading>
           </CardHeader>
           <CardBody>
-            <Text>First Name</Text>
+            <Text>First Name*</Text>
             <Input
               placeholder="Enter your first name"
               className="mt-1 input-styling"
@@ -142,7 +146,7 @@ export default function Register() {
               }
             />
 
-            <Text>Last Name</Text>
+            <Text>Last Name*</Text>
             <Input
               placeholder="Enter your last name"
               className="mt-1 input-styling"
@@ -158,10 +162,10 @@ export default function Register() {
               }
             />
 
-            <Text>Email</Text>
+            <Text>Email*</Text>
             <Input
               placeholder="Enter your email"
-              className="mt-1"
+              className="mt-1 input-styling"
               size="md"
               value={formData?.email}
               onChange={(e) =>
@@ -173,14 +177,14 @@ export default function Register() {
                 })
               }
             />
-            <Text className="mt-10">Password</Text>
+            <Text className="">Password*</Text>
 
             <InputGroup size="md">
               <Input
                 pr="4.5rem"
                 type={show ? 'text' : 'password'}
                 placeholder="Enter password"
-                className="mt-1"
+                className="mt-1 input-styling"
                 value={formData?.password}
                 onChange={(e) =>
                   setFormData((prev) => {
