@@ -45,7 +45,7 @@ function ContactUs() {
         <Divider my="4" />
       </Box>
       <footer>
-        <Text textAlign="center">&copy; 2023 YourCompanyName. All rights reserved.</Text>
+        <Text textAlign="center">&copy; 2023 Present-A better way to present. All rights reserved.</Text>
       </footer>
     </Box>
   );
