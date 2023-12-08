@@ -4,13 +4,13 @@ import Bgimage from '../../images/backg-image.jpg'
 import './index.css'
 import { Button } from '@/shadcn/ui/button'
 
-const index = () => {
+const LandingInfo = () => {
   const headerFont = { fontFamily: 'Montserrat' }
   const paraFont = { fontFamily: 'Merriweather' }
   return (
     <>
-      <section>
-        <p className="header-info" style={headerFont}>
+      <section className="text-stone-300">
+        <p className="header-info text-stone-300">
           Present: Unleash Your Ideas, Craft Your Story, <br />
           Captivate Your Audience.
         </p>
@@ -30,15 +30,11 @@ const index = () => {
                   Craft presentations effortlessly with our intuitive tools,
                   collaborate seamlessly with remote teams, and present with
                   style. Our platform is not just about conveying information;
-                  it's about making a statement with every slide. Immerse
+                  its about making a statement with every slide. Immerse
                   yourself in a brand that radiates happiness and excitement,
                   and let your presentations reflect that same effortless
                   elegance.
                 </p>
-                <div className="info-buttons">
-                  <Button className="btn-style">Get Started</Button>
-                  <Button className="btn-style">Learn More</Button>
-                </div>
               </div>
             </div>
             <div className="col-md-6">
@@ -53,4 +49,4 @@ const index = () => {
   )
 }
 
-export default index
+export default LandingInfo
