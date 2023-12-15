@@ -35,5 +35,5 @@ To run this application locally, follow these steps:
 ## Contributors
 
 - [Atharva Kamble](https://github.com/atharvaneu)
-- [Gaurav Singh](https://github.com/sinhagaurav7)
+- [Gaurav Sinha](https://github.com/sinhagaurav7)
 - [Govind Mudavadkar](https://github.com/GovindMNEU)
